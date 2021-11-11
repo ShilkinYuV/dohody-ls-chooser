@@ -4,7 +4,7 @@ import sys
 
 app = QtWidgets.QApplication([])
 application = MainWindow()
-application.setWindowTitle("Проверщик")
+application.setWindowTitle("Проверка неисполненных поручений v1.0")
 application.show()
 
 sys.exit(app.exec())

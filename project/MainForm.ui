@@ -13,25 +13,73 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resourses.qrc">
+    <normaloff>:/newPrefix/roskazna.png</normaloff>:/newPrefix/roskazna.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow, QMenuBar, QMenu, QAction, QStatusBar{
+background-color: #003dad;
+color: white;
+}
+
+QMenu::selected{
+background-color: #63b9ff;
+color: white;
+}
+QMenuBar::item:selected{
+background-color: #63b9ff;
+color: white;
+}
+
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget
+{
+background-color: white
+};</string>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="pbtn_add_report">
-          <property name="text">
-           <string>Проверить отчет</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QTableWidget" name="tableWidget"/>
-      </item>
-     </layout>
+     <widget class="QWidget" name="widget_2" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="pbtn_add_report">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">.QPushButton{
+background-color: #3a66e0;
+color: white;
+border: 0;
+height: 20px;
+}
+
+.QPushButton::hover{
+	background-color: #63b9ff;
+}</string>
+         </property>
+         <property name="text">
+          <string>Проверить отчет</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="styleSheet">
+          <string notr="true">.QTableWidget{
+background-color: #3a66e0;
+color: white;
+border: 0;
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -71,6 +119,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resourses.qrc"/>
+ </resources>
  <connections/>
 </ui>

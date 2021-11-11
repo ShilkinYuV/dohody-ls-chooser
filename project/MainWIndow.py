@@ -1,6 +1,10 @@
+import openpyxl
 from PyQt5.QtGui import QFont
+from openpyxl.styles import Alignment,Font
 
+from openpyxl.workbook.workbook import Workbook
 from MainForm import Ui_MainWindow
+from AboutWindow import AboutWindows
 from PyQt5.QtWidgets import QAbstractItemView, QDesktopWidget, QDialog, QFileDialog, QLabel, QTableWidgetItem, QHeaderView, QMessageBox, QWidget
 from PyQt5 import QtWidgets, QtCore
 import os
@@ -12,13 +16,15 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow,self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.aboutForm = None
         self.ui.pbtn_add_report.clicked.connect(self.open_file)
-
+        self.ui.action_save_to_excel.triggered.connect(self.ExportResultsToExcel)
         self.ui.tableWidget.setRowCount(1)
         self.ui.tableWidget.setColumnCount(5)
         self.ui.tableWidget.horizontalHeader().setVisible(False)
         self.ui.tableWidget.verticalHeader().setVisible(False)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.action_about_program.triggered.connect(self.OpenAbout)
         self.font = QFont()
         self.font.setBold(True)
         self.font.setPixelSize(14)
@@ -72,6 +78,48 @@ class MainWindow(QtWidgets.QMainWindow):
         newItem.setFont(self.font)
         newItem.setTextAlignment(QtCore.Qt.AlignCenter)
         self.ui.tableWidget.setItem(0, 4, newItem)
+
+    def ExportResultsToExcel(self):
+        wb = Workbook()
+        filename, _ = QFileDialog.getSaveFileName(self, 'Сохранить файл', '', ".xlsx(*.xlsx)")
+        if filename in "('', '')":
+            self.ui.statusbar.showMessage('Не выбран файл для сохранения.')
+        else:
+            try:
+                self.sheet = wb.active
+                row = 1
+                col = 1
+                wrap_alignment = Alignment(wrap_text=True)
+                headerfont = Font(bold=True)
+                for i in range(self.ui.tableWidget.rowCount()):
+                    for x in range(self.ui.tableWidget.columnCount()):
+                        try:
+                            text = str(self.ui.tableWidget.item(i, x).text())
+                            self.sheet.cell(row=row, column=col).value = text
+                            self.sheet.cell(row=row, column=col).alignment = wrap_alignment
+                            if row == 1:
+                                self.sheet.cell(row=row, column=col).font = headerfont
+                            col += 1
+                        except AttributeError:
+                            col += 1
+
+                    row += 1
+                    col = 1
+                self.sheet.column_dimensions['A'].width = 20
+                self.sheet.column_dimensions['B'].width = 20
+                self.sheet.column_dimensions['C'].width = 20
+                self.sheet.column_dimensions['D'].width = 75
+                self.sheet.column_dimensions['E'].width = 75
+
+                wb.save(filename=filename)
+            except:
+                self.ui.statusbar.showMessage('Ошибка при сохранении файла.')
+
+    def OpenAbout(self):
+        if (self.aboutForm != None):
+            self.aboutForm.close()
+        self.aboutForm = AboutWindows()
+        self.aboutForm.show()
 
     @QtCore.pyqtSlot(list,bool)
     def appendText(self, list, _bool):

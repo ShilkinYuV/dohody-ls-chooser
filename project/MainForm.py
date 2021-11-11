@@ -15,24 +15,61 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(768, 424)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/newPrefix/roskazna.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
+        MainWindow.setStyleSheet("QMainWindow, QMenuBar, QMenu, QAction, QStatusBar{\n"
+"background-color: #003dad;\n"
+"color: white;\n"
+"}\n"
+"\n"
+"QMenu::selected{\n"
+"background-color: #63b9ff;\n"
+"color: white;\n"
+"}\n"
+"QMenuBar::item:selected{\n"
+"background-color: #63b9ff;\n"
+"color: white;\n"
+"}\n"
+"\n"
+"")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setStyleSheet("QWidget\n"
+"{\n"
+"background-color: white\n"
+"};")
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.widget_2 = QtWidgets.QWidget(self.centralwidget)
+        self.widget_2.setObjectName("widget_2")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget_2)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pbtn_add_report = QtWidgets.QPushButton(self.centralwidget)
+        self.pbtn_add_report = QtWidgets.QPushButton(self.widget_2)
+        self.pbtn_add_report.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pbtn_add_report.setStyleSheet(".QPushButton{\n"
+"background-color: #3a66e0;\n"
+"color: white;\n"
+"border: 0;\n"
+"height: 20px;\n"
+"}\n"
+"\n"
+".QPushButton::hover{\n"
+"    background-color: #63b9ff;\n"
+"}")
         self.pbtn_add_report.setObjectName("pbtn_add_report")
-        self.horizontalLayout.addWidget(self.pbtn_add_report)
-        self.verticalLayout.addLayout(self.horizontalLayout)
-        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
+        self.verticalLayout.addWidget(self.pbtn_add_report)
+        self.tableWidget = QtWidgets.QTableWidget(self.widget_2)
+        self.tableWidget.setStyleSheet(".QTableWidget{\n"
+"background-color: #3a66e0;\n"
+"color: white;\n"
+"border: 0;\n"
+"}")
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
         self.verticalLayout.addWidget(self.tableWidget)
-        self.horizontalLayout_2.addLayout(self.verticalLayout)
+        self.horizontalLayout_2.addWidget(self.widget_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 768, 21))
@@ -65,3 +102,4 @@ class Ui_MainWindow(object):
         self.menu_2.setTitle(_translate("MainWindow", "Помощь"))
         self.action_about_program.setText(_translate("MainWindow", "О программе"))
         self.action_save_to_excel.setText(_translate("MainWindow", "Сохранить в Excel"))
+import resourses
