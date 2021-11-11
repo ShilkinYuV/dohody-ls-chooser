@@ -26,9 +26,6 @@ class Ui_MainWindow(object):
         self.pbtn_add_report = QtWidgets.QPushButton(self.centralwidget)
         self.pbtn_add_report.setObjectName("pbtn_add_report")
         self.horizontalLayout.addWidget(self.pbtn_add_report)
-        self.pbtn_start_analyz = QtWidgets.QPushButton(self.centralwidget)
-        self.pbtn_start_analyz.setObjectName("pbtn_start_analyz")
-        self.horizontalLayout.addWidget(self.pbtn_start_analyz)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setObjectName("tableWidget")
@@ -63,8 +60,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pbtn_add_report.setText(_translate("MainWindow", "Добавить отчет"))
-        self.pbtn_start_analyz.setText(_translate("MainWindow", "Приступить к проверке"))
+        self.pbtn_add_report.setText(_translate("MainWindow", "Проверить отчет"))
         self.menu.setTitle(_translate("MainWindow", "Файл"))
         self.menu_2.setTitle(_translate("MainWindow", "Помощь"))
         self.action_about_program.setText(_translate("MainWindow", "О программе"))

@@ -22,14 +22,7 @@
         <item>
          <widget class="QPushButton" name="pbtn_add_report">
           <property name="text">
-           <string>Добавить отчет</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pbtn_start_analyz">
-          <property name="text">
-           <string>Приступить к проверке</string>
+           <string>Проверить отчет</string>
           </property>
          </widget>
         </item>

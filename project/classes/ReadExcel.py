@@ -13,15 +13,14 @@ from .ReportByLS import ReportByLS
 
 
 class ReadExcel(QThread):
+
+    appendText = QtCore.pyqtSignal(list,bool)
+
     def __init__(self, my_window, parent=None):
         super(ReadExcel, self).__init__()
         self.my_window = my_window
 
         self.filename = ''
-        self.dict_lic_scheta = {}
-        # self.dict_summ = {}
-        self.dict_vozvraty = {}
-        self.dict_zachety = {}
         self.dict_LS = []
         self.delete_file = True
 
@@ -47,23 +46,52 @@ class ReadExcel(QThread):
         for cell in this_sheet['A']:
             i = i + 1
 
-            if str(this_sheet['X' + str(i)].value) != None and str(this_sheet['X' + str(i)].value) != '█' and len(
+            if str(this_sheet['X' + str(i)].value) is not None and str(this_sheet['X' + str(i)].value) != '█' and len(
                     str(this_sheet['X' + str(i)].value).strip()) == 11 and str(
-                    this_sheet['X' + str(i)].value).__contains__(",") != True:
-                templsvalue = str(this_sheet['X' + str(i)].value)
+                this_sheet['X' + str(i)].value).__contains__(",") is not True:
+                templsvalue = ReportByLS(licevoy=str(this_sheet['X' + str(i)].value))
+                j = i
 
-            if cell.value != None and cell.value != '█' and str(cell.value).lower().__contains__(
-                    "неисполненные поручения администратора доходов") and templsvalue != None:
+                while not str(this_sheet['A' + str(j)].value).lower().__contains__('администратор доходов бюджета'):
+                    j = j + 1
+
+                while ((str(this_sheet['A' + str(j)].value).lower().__contains__('администратор доходов бюджета') or
+                        this_sheet['A' + str(j)].value is None)
+                       and not str(this_sheet['A' + str(j)].value).lower().__contains__(
+                            'главный администратор доходов бюджета')):
+                    templsvalue.dohody_admin = templsvalue.dohody_admin + str(this_sheet['L' + str(j)].value)
+                    j = j + 1
+
+                while not str(this_sheet['A' + str(j)].value).lower().__contains__('наименование бюджета'):
+                    j = j + 1
+
+                while str(this_sheet['A' + str(j)].value).lower().__contains__('наименование бюджета') \
+                        or this_sheet['A' + str(j)].value is None:
+                    templsvalue.budget = templsvalue.budget + str(this_sheet['L' + str(j)].value)
+                    j = j + 1
+
+            if cell.value is not None and cell.value != '█' and str(cell.value).lower().__contains__(
+                    "неисполненные поручения администратора доходов") and templsvalue is not None:
                 isWeFindNeispPoruch = True
 
-            if cell.value != None and cell.value != '█' and str(cell.value).__contains__(
-                    "Итого") and isWeFindNeispPoruch:
-                self.dict_LS.append(ReportByLS(licevoy=templsvalue, vozvraty=str(this_sheet['S' + str(i)].value),
-                                               zachety=str(this_sheet['AB' + str(i)].value)))
+            if cell.value is not None and cell.value != '█' and str(cell.value).__contains__("Итого") \
+                    and isWeFindNeispPoruch:
+                templsvalue.vozvraty = str(this_sheet['S' + str(i)].value)
+                templsvalue.zachety = str(this_sheet['AB' + str(i)].value)
+                self.dict_LS.append(templsvalue)
                 isWeFindNeispPoruch = False
                 templsvalue = None
 
-        print(len(self.dict_LS))
+        if len(self.dict_LS) > 0:
+            self._bool = True
+        else:
+            self._bool = False
 
-        for v in self.dict_LS:
-            print('LS: ', v.licevoy, ' vozvraty: ', v.vozvraty, ' zachety: ', v.zachety)
+        self.appendText.emit(self.dict_LS,self._bool)
+
+        # for v in self.dict_LS:
+        #     print('LS: ', v.licevoy, ' vozvraty: ', v.vozvraty, ' zachety: ', v.zachety)
+        #     print('budget: ', v.budget)
+        #     print('dohody_admin', v.dohody_admin)
+
+        self.my_window.ui.pbtn_add_report.setEnabled(True)
