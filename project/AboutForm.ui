@@ -38,7 +38,7 @@
    <string>Dialog</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Images.qrc">
+   <iconset>
     <normaloff>:/roskazna.png</normaloff>:/roskazna.png</iconset>
   </property>
   <property name="styleSheet">
@@ -79,7 +79,8 @@
 border-bottom-right-radius: 20px;
 border-color: black;
 color: white;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3a66e0, stop:1 #003dad);</string>
+background-color: #0288D0;
+</string>
       </property>
       <property name="text">
        <string/>

@@ -38,7 +38,8 @@ class Ui_Dialog(object):
 "border-bottom-right-radius: 20px;\n"
 "border-color: black;\n"
 "color: white;\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3a66e0, stop:1 #003dad);")
+"background-color: #0288D0;\n"
+"")
         self.label.setText("")
         self.label.setObjectName("label")
         self.layoutWidget = QtWidgets.QWidget(self.widget)
@@ -94,4 +95,3 @@ class Ui_Dialog(object):
         self.label_2.setText(_translate("Dialog", "Инспектор-делопроизводитель Новиков Михаил Александрович"))
         self.label_5.setText(_translate("Dialog", "Специалист 1 разряда Шилкин Юрий Викторович"))
 
-import resourses

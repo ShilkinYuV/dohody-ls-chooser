@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'MainForm_new.ui'
+# Form implementation generated from reading ui file 'MainForm.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -19,27 +19,24 @@ class Ui_MainWindow(object):
         icon.addPixmap(QtGui.QPixmap(":/newPrefix/roskazna.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("QMainWindow, QMenuBar, QMenu, QAction, QStatusBar{\n"
-"background-color: #03A9F5;\n"
+"background-color: #003dad;\n"
 "color: white;\n"
-"font: 12pt \"Times New Roman\";\n"
 "}\n"
 "\n"
 "QMenu::selected{\n"
 "background-color: #63b9ff;\n"
 "color: white;\n"
-"font: 12pt \"Times New Roman\";\n"
 "}\n"
 "QMenuBar::item:selected{\n"
 "background-color: #63b9ff;\n"
 "color: white;\n"
-"font: 12pt \"Times New Roman\";\n"
 "}\n"
 "\n"
 "")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("QWidget\n"
 "{\n"
-"background-color: #0288D0;\n"
+"background-color: white\n"
 "};")
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -51,12 +48,10 @@ class Ui_MainWindow(object):
         self.pbtn_add_report = QtWidgets.QPushButton(self.widget_2)
         self.pbtn_add_report.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pbtn_add_report.setStyleSheet(".QPushButton{\n"
-"background-color: #E57373;\n"
+"background-color: #3a66e0;\n"
 "color: white;\n"
 "border: 0;\n"
-"border-radius: 2;\n"
-"height: 30px;\n"
-"font: 75 12pt \"MS Shell Dlg 2\";\n"
+"height: 20px;\n"
 "}\n"
 "\n"
 ".QPushButton::hover{\n"
@@ -66,7 +61,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.pbtn_add_report)
         self.tableWidget = QtWidgets.QTableWidget(self.widget_2)
         self.tableWidget.setStyleSheet(".QTableWidget{\n"
-"background-color: rgba(3, 169, 245, 150);\n"
+"background-color: #3a66e0;\n"
 "color: white;\n"
 "border: 0;\n"
 "}")
@@ -77,7 +72,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.widget_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 768, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 768, 21))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
@@ -107,4 +102,4 @@ class Ui_MainWindow(object):
         self.menu_2.setTitle(_translate("MainWindow", "Помощь"))
         self.action_about_program.setText(_translate("MainWindow", "О программе"))
         self.action_save_to_excel.setText(_translate("MainWindow", "Сохранить в Excel"))
-
+import resourses
